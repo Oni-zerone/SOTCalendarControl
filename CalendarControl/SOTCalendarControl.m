@@ -385,7 +385,11 @@
 -(void)setUserInteractionEnabled:(BOOL)userInteractionEnabled{
     [super setUserInteractionEnabled:userInteractionEnabled];
     if(userInteractionEnabled){
-        [_dayLabel setTextColor:[UIColor blackColor]];
+        if(self.selected){
+            [_dayLabel setTextColor:[UIColor whiteColor]];
+        }else{
+            [_dayLabel setTextColor:[UIColor blackColor]];
+        }
     }else{
         [_dayLabel setTextColor:[UIColor darkGrayColor]];
     }
