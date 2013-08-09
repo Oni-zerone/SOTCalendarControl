@@ -23,6 +23,8 @@
 -(void)selectNextDate;
 -(void)selectPrevDate;
 
+-(NSInteger)numberOfDays;
+
 @end
 
 

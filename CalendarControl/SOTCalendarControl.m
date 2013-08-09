@@ -11,6 +11,7 @@
 
 @interface SOTCalendarControl () <UICollectionViewDataSource, UICollectionViewDelegate>{
     CGSize intrinsicSize;
+    NSInteger numberOfDays;
 }
 
 
@@ -50,6 +51,8 @@
     NSDateComponents *weekcomponents = [calendar components:NSWeekdayCalendarUnit fromDate:_startDate];
     
     int dayCount = (([weekcomponents weekday]-1) == 0)? 6 : ([weekcomponents weekday]-2);
+    
+    numberOfDays = 56 - dayCount;
     
     _firstDate = [_startDate dateByAddingTimeInterval:-(3600 * 24 * dayCount)];
 
@@ -199,7 +202,7 @@
     NSDate *selectedDate = [(SOTDayCell *)[collectionView cellForItemAtIndexPath:indexPath] day];
     [self setCurrentLabelWithDate:selectedDate];
     [self setSelectedDate:selectedDate];
-    [self sendActionsForControlEvents:UIControlEventEditingChanged];
+    [self sendActionsForControlEvents:UIControlEventValueChanged];
 }
 
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView{
@@ -225,6 +228,10 @@
     }
     
     [_agendaCollection selectItemAtIndexPath:indexPath animated:YES scrollPosition:UICollectionViewScrollPositionCenteredHorizontally];
+}
+
+-(NSInteger)numberOfDays{
+    return self->numberOfDays;
 }
 
 @end
@@ -277,7 +284,7 @@
     
     [_weekDayLabel setTextAlignment:NSTextAlignmentCenter];
     [_weekDayLabel setBackgroundColor:[UIColor clearColor]];
-    [_weekDayLabel setTextColor:[UIColor darkGrayColor]];
+    //[_weekDayLabel setTextColor:[UIColor darkGrayColor]];
     [_weekDayLabel setFont:[UIFont fontWithName:@"HelveticaNeue-Light" size:12.0f]];
     
     //Constraints
@@ -373,7 +380,10 @@
     if(today){
         [self.selectedBackgroundView setBackgroundColor:[UIColor blueColor]];
     }else{
-        [self.selectedBackgroundView setBackgroundColor:[UIColor redColor]];
+        [self.selectedBackgroundView setBackgroundColor:[UIColor colorWithRed:0.0f
+                                                                        green:0.5960f
+                                                                         blue:0.8196f
+                                                                        alpha:1.0f]];
     }
     self->__today = today;
 }
@@ -387,11 +397,14 @@
     if(userInteractionEnabled){
         if(self.selected){
             [_dayLabel setTextColor:[UIColor whiteColor]];
+            [_weekDayLabel setTextColor:[UIColor whiteColor]];
         }else{
             [_dayLabel setTextColor:[UIColor blackColor]];
+            [_weekDayLabel setTextColor:[UIColor darkGrayColor]];
         }
     }else{
-        [_dayLabel setTextColor:[UIColor darkGrayColor]];
+        [_dayLabel setTextColor:[UIColor lightGrayColor]];
+        [_weekDayLabel setTextColor:[UIColor lightGrayColor]];
     }
 }
 
