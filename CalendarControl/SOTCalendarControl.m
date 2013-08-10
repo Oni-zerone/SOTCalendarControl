@@ -378,11 +378,15 @@
 
 -(void)setToday:(BOOL)today{
     if(today){
-        [self.selectedBackgroundView setBackgroundColor:[UIColor blueColor]];
-    }else{
         [self.selectedBackgroundView setBackgroundColor:[UIColor colorWithRed:0.0f
                                                                         green:0.5960f
                                                                          blue:0.8196f
+                                                                        alpha:1.0f]];
+        
+    }else{
+        [self.selectedBackgroundView setBackgroundColor:[UIColor colorWithRed:(0.0f/225)
+                                                                        green:(61.0f/225)
+                                                                         blue:(87.0f/225)
                                                                         alpha:1.0f]];
     }
     self->__today = today;
