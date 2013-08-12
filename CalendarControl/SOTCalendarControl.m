@@ -80,7 +80,7 @@
     _currentLabel = [[UILabel alloc] init];
     [_currentLabel setTextColor:[UIColor darkGrayColor]];
     [_currentLabel setBackgroundColor:[UIColor clearColor]];
-    [_currentLabel setFont:[UIFont fontWithName:@"HelveticaNeue-Light" size:13.0f]];
+    [_currentLabel setFont:[UIFont fontWithName:@"HelveticaNeue" size:13.0f]];
     [_currentLabel setTranslatesAutoresizingMaskIntoConstraints:NO];
     [self addSubview:_currentLabel];
     
@@ -285,7 +285,7 @@
     [_weekDayLabel setTextAlignment:NSTextAlignmentCenter];
     [_weekDayLabel setBackgroundColor:[UIColor clearColor]];
     //[_weekDayLabel setTextColor:[UIColor darkGrayColor]];
-    [_weekDayLabel setFont:[UIFont fontWithName:@"HelveticaNeue-Light" size:12.0f]];
+    [_weekDayLabel setFont:[UIFont fontWithName:@"HelveticaNeue" size:12.0f]];
     
     //Constraints
     NSArray *constraints = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-(>=1)-[_weekDayLabel(==15)][_dayLabel]|"
