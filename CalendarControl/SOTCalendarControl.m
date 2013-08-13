@@ -78,10 +78,11 @@
     
     //CurrentLabel
     _currentLabel = [[UILabel alloc] init];
+    [_currentLabel setTranslatesAutoresizingMaskIntoConstraints:NO];
     [_currentLabel setTextColor:[UIColor darkGrayColor]];
     [_currentLabel setBackgroundColor:[UIColor clearColor]];
     [_currentLabel setFont:[UIFont fontWithName:@"HelveticaNeue" size:13.0f]];
-    [_currentLabel setTranslatesAutoresizingMaskIntoConstraints:NO];
+    [_currentLabel setText:@"Date"];
     [self addSubview:_currentLabel];
     
     [self performSelector:@selector(loadInit) withObject:nil afterDelay:0.1f];
@@ -106,6 +107,8 @@
 
 
 -(void)layoutSubviews{
+    [self removeConstraints:self.constraints];
+    
     //Agenda Collection
     [_agendaCollection setBackgroundColor:[UIColor clearColor]];
     [_agendaCollection setPagingEnabled:YES];
@@ -119,10 +122,16 @@
                                                                      views:viewDictionary];
     [self addConstraints:constraints];
     
-    constraints = [NSLayoutConstraint constraintsWithVisualFormat:@"[_agendaCollection(==308)]"
+    constraints = [NSLayoutConstraint constraintsWithVisualFormat:@"|-(>=6)-[_agendaCollection(==308)]-(>=6)-|"
                                                           options:0
                                                           metrics:nil
                                                             views:NSDictionaryOfVariableBindings(_agendaCollection)];
+    [self addConstraints:constraints];
+    
+    constraints = [NSLayoutConstraint constraintsWithVisualFormat:@"|-(>=6)-[_currentLabel]-(>=6)-|"
+                                                          options:0
+                                                          metrics:nil
+                                                            views:NSDictionaryOfVariableBindings(_currentLabel)];
     [self addConstraints:constraints];
     
     NSLayoutConstraint *constraint = [NSLayoutConstraint constraintWithItem:self
